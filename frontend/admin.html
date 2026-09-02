@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="PUA UniTrack Administration"
+  >
+
+  <title>Admin • PUA UniTrack</title>
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header class="nav">
+
+    <a class="brand" href="/">
+
+      <div class="brand-mark">
+        <span>PUA</span>
+      </div>
+
+      <div>
+        <b>
+          UniTrack <em>AI</em>
+        </b>
+
+        <small>
+          Administration
+        </small>
+      </div>
+
+    </a>
+
+    <button
+      id="logout"
+      class="nav-login"
+      type="button"
+    >
+      Logout
+    </button>
+
+  </header>
+
+
+  <!-- =========================
+       ADMIN DASHBOARD
+  ========================== -->
+
+  <main class="dashboard">
+
+    <div class="dash-head">
+
+      <div>
+
+        <label>
+          ADMIN CONTROL CENTER
+        </label>
+
+        <h1>
+          Faculty approvals.
+        </h1>
+
+        <p>
+          Approve doctor accounts before they appear
+          in the student directory.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         PENDING DOCTORS
+    ========================== -->
+
+    <section class="panel">
+
+      <div class="panel-title">
+
+        <div>
+
+          <b>
+            Pending accounts
+          </b>
+
+          <small id="pendingCount">
+            Loading...
+          </small>
+
+        </div>
+
+        <button
+          id="refresh"
+          class="small-btn"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+      <div
+        id="pending"
+        class="admin-list"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         ALL DOCTORS
+    ========================== -->
+
+    <section class="panel">
+
+      <div class="panel-title">
+
+        <div>
+
+          <b>
+            All doctors
+          </b>
+
+          <small>
+            Current account status
+          </small>
+
+        </div>
+
+      </div>
+
+      <div
+        id="allDoctors"
+        class="admin-list"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       ADMIN JAVASCRIPT
+  ========================== -->
+
+  <script src="/admin.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="PUA UniTrack - Faculty of Computer Science and Artificial Intelligence"
+  >
+
+  <title>Login • PUA UniTrack</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* =========================================================
+       PUA UNITRACK - LOGIN PAGE
+       Self contained CSS
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #07111f;
+      --navy-2: #0a1728;
+      --blue: #1777ff;
+      --blue-light: #4da3ff;
+      --cyan: #25d9ff;
+      --white: #ffffff;
+      --muted: #9aabc0;
+      --border: rgba(255,255,255,.10);
+      --card: rgba(10, 24, 42, .78);
+      --success: #2ee6a6;
+      --danger: #ff647c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", Arial, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(23,119,255,.20),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 85% 75%,
+          rgba(37,217,255,.12),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #06101d 0%,
+          #081525 45%,
+          #050b16 100%
+        );
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .25;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.035) 1px,
+          transparent 1px
+        );
+
+      background-size: 55px 55px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+      );
+    }
+
+    .glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: .18;
+      animation: floatGlow 8s ease-in-out infinite;
+    }
+
+    .glow-one {
+      background: #087dff;
+      top: -180px;
+      left: -120px;
+    }
+
+    .glow-two {
+      background: #00d9ff;
+      right: -180px;
+      bottom: -180px;
+      animation-delay: -4s;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -25px);
+      }
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .login-nav {
+      position: relative;
+      z-index: 10;
+
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+
+      padding: 26px 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .login-brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      text-decoration: none;
+      color: white;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+
+      border-radius: 14px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          #176fff,
+          #0b3b88
+        );
+
+      border: 1px solid rgba(255,255,255,.20);
+
+      box-shadow:
+        0 10px 30px rgba(0,105,255,.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-text strong {
+      font-size: 17px;
+      letter-spacing: -.3px;
+    }
+
+    .brand-text strong span {
+      color: var(--cyan);
+    }
+
+    .brand-text small {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .2px;
+    }
+
+    .back-home {
+      color: #b8c6d8;
+      text-decoration: none;
+
+      padding: 10px 15px;
+      border-radius: 10px;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition: .25s ease;
+    }
+
+    .back-home:hover {
+      color: white;
+      background: rgba(255,255,255,.06);
+      transform: translateX(-3px);
+    }
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    .login-container {
+      position: relative;
+      z-index: 2;
+
+      width: min(1120px, calc(100% - 48px));
+      min-height: calc(100vh - 95px);
+
+      margin: 0 auto;
+      padding: 45px 0 80px;
+
+      display: grid;
+      grid-template-columns: 1fr 470px;
+      gap: 90px;
+
+      align-items: center;
+    }
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .login-intro {
+      animation: introIn .8s ease both;
+    }
+
+    @keyframes introIn {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .secure-badge {
+      width: fit-content;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 8px 13px;
+
+      border-radius: 999px;
+
+      color: #a8d4ff;
+      background: rgba(28,117,255,.08);
+      border: 1px solid rgba(63,147,255,.20);
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--success);
+
+      box-shadow: 0 0 12px rgba(46,230,166,.9);
+
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .45;
+        transform: scale(.75);
+      }
+    }
+
+    .login-intro h1 {
+      margin-top: 25px;
+
+      max-width: 650px;
+
+      font-size: clamp(45px, 6vw, 72px);
+      line-height: .98;
+
+      letter-spacing: -3.5px;
+      font-weight: 800;
+    }
+
+    .login-intro h1 span {
+      background:
+        linear-gradient(
+          100deg,
+          #ffffff,
+          #63b4ff,
+          #23dfff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .login-intro > p {
+      max-width: 550px;
+
+      margin-top: 25px;
+
+      color: #a5b6ca;
+
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       FEATURES
+    ========================================================= */
+
+    .intro-features {
+      margin-top: 38px;
+
+      display: grid;
+      gap: 13px;
+
+      max-width: 500px;
+    }
+
+    .intro-feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      padding: 13px;
+
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 15px;
+
+      background: rgba(255,255,255,.025);
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease;
+    }
+
+    .intro-feature:hover {
+      transform: translateX(7px);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(55,157,255,.20);
+    }
+
+    .feature-icon {
+      width: 39px;
+      height: 39px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 11px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(25,119,255,.25),
+          rgba(37,217,255,.07)
+        );
+
+      border: 1px solid rgba(50,150,255,.20);
+
+      color: #66b7ff;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .intro-feature strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .intro-feature small {
+      color: #8194aa;
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       AUTH CARD
+    ========================================================= */
+
+    .auth-card {
+      position: relative;
+
+      padding: 34px;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16,34,57,.88),
+          rgba(7,17,31,.88)
+        );
+
+      border: 1px solid rgba(255,255,255,.11);
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+      backdrop-filter: blur(20px);
+
+      animation: cardIn .8s .1s ease both;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .auth-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 12%;
+      right: 12%;
+
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(71,166,255,.9),
+          transparent
+        );
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      margin-bottom: 28px;
+    }
+
+    .card-label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #55aaff;
+
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .card-top h2 {
+      font-size: 28px;
+      letter-spacing: -.8px;
+    }
+
+    .card-top p {
+      margin-top: 6px;
+
+      color: #8497ad;
+
+      font-size: 12px;
+    }
+
+    .secure-icon {
+      width: 43px;
+      height: 43px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
+
+      background: rgba(28,121,255,.09);
+      border: 1px solid rgba(66,157,255,.17);
+
+      font-size: 18px;
+    }
+
+    /* =========================================================
+       FORM
+    ========================================================= */
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #b9c7d8;
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #66829f;
+
+      font-size: 13px;
+
+      pointer-events: none;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 48px;
+
+      padding: 0 45px 0 40px;
+
+      color: white;
+
+      background: rgba(2,9,18,.55);
+
+      border: 1px solid rgba(255,255,255,.09);
+
+      border-radius: 12px;
+
+      outline: none;
+
+      font-family: inherit;
+      font-size: 13px;
+
+      transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .input-wrap input::placeholder {
+      color: #50647a;
+    }
+
+    .input-wrap input:focus {
+      border-color: rgba(49,146,255,.75);
+
+      background: rgba(4,15,28,.85);
+
+      box-shadow:
+        0 0 0 4px rgba(24,120,255,.08);
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      right: 10px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: 0;
+      background: transparent;
+
+      color: #5daeff;
+
+      font-family: inherit;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .password-toggle:hover {
+      color: white;
+    }
+
+    /* =========================================================
+       BUTTON
+    ========================================================= */
+
+    .primary-button {
+      position: relative;
+
+      width: 100%;
+      height: 50px;
+
+      margin-top: 5px;
+
+      border: 0;
+      border-radius: 12px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          100deg,
+          #1269e9,
+          #188bff
+        );
+
+      font-family: inherit;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 10px 28px rgba(18,105,233,.25);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .primary-button::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: -100%;
+
+      width: 60%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.20),
+          transparent
+        );
+
+      transform: skewX(-20deg);
+
+      transition: .6s ease;
+    }
+
+    .primary-button:hover::before {
+      left: 130%;
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 15px 35px rgba(18,105,233,.35);
+    }
+
+    .primary-button:active {
+      transform: translateY(0);
+    }
+
+    .primary-button:disabled {
+      cursor: not-allowed;
+      opacity: .65;
+      transform: none;
+    }
+
+    .button-arrow {
+      margin-left: 8px;
+      font-size: 16px;
+    }
+
+    /* =========================================================
+       MESSAGE
+    ========================================================= */
+
+    .form-message {
+      margin-top: 14px;
+
+      padding: 11px 13px;
+
+      border-radius: 10px;
+
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .form-message.error {
+      color: #ff9aaa;
+      background: rgba(255,70,100,.08);
+      border: 1px solid rgba(255,70,100,.16);
+    }
+
+    .form-message.success {
+      color: #77efc1;
+      background: rgba(46,230,166,.07);
+      border: 1px solid rgba(46,230,166,.14);
+    }
+
+    /* =========================================================
+       REGISTER
+    ========================================================= */
+
+    .register-box {
+      margin-top: 25px;
+      padding-top: 22px;
+
+      border-top: 1px solid rgba(255,255,255,.07);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .register-box strong {
+      font-size: 12px;
+    }
+
+    .register-box p {
+      max-width: 250px;
+
+      margin-top: 5px;
+
+      color: #71869d;
+
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .secondary-button {
+      flex-shrink: 0;
+
+      padding: 10px 13px;
+
+      color: #9fcfff;
+
+      text-decoration: none;
+
+      border: 1px solid rgba(62,153,255,.20);
+
+      border-radius: 10px;
+
+      background: rgba(30,125,255,.06);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      transition: .2s ease;
+    }
+
+    .secondary-button:hover {
+      color: white;
+      background: rgba(30,125,255,.13);
+      border-color: rgba(62,153,255,.38);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .card-footer {
+      margin-top: 23px;
+
+      padding-top: 16px;
+
+      border-top: 1px solid rgba(255,255,255,.05);
+
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+
+      color: #53667c;
+
+      font-size: 8px;
+    }
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .loading-spinner {
+      display: inline-block;
+
+      width: 13px;
+      height: 13px;
+
+      margin-right: 7px;
+
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      vertical-align: -2px;
+
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .login-container {
+        grid-template-columns: 1fr;
+        gap: 45px;
+
+        width: min(650px, calc(100% - 36px));
+      }
+
+      .login-intro {
+        text-align: center;
+      }
+
+      .secure-badge {
+        margin: auto;
+      }
+
+      .login-intro h1 {
+        font-size: 52px;
+      }
+
+      .login-intro > p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .intro-features {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .login-nav {
+        width: calc(100% - 28px);
+        padding: 18px 0;
+      }
+
+      .back-home {
+        display: none;
+      }
+
+      .login-container {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+
+      .login-intro h1 {
+        font-size: 43px;
+        letter-spacing: -2.5px;
+      }
+
+      .login-intro > p {
+        font-size: 13px;
+      }
+
+      .auth-card {
+        padding: 23px 18px;
+        border-radius: 20px;
+      }
+
+      .register-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .secondary-button {
+        width: 100%;
+        text-align: center;
+      }
+
+      .card-footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body class="login-page">
+
+  <!-- Background -->
+  <div class="background-grid"></div>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
+  <header class="login-nav">
+
+    <a href="/" class="login-brand">
+
+      <div class="brand-logo">
+        PUA
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          UniTrack <span>AI</span>
+        </strong>
+
+        <small>
+          CS & AI • Pharos University
+        </small>
+
+      </div>
+
+    </a>
+
+    <a href="/" class="back-home">
+      ← Back to Home
+    </a>
+
+  </header>
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main class="login-container">
+
+
+    <!-- =====================================================
+         LEFT
+    ====================================================== -->
+
+    <section class="login-intro">
+
+      <div class="secure-badge">
+        <span class="live-dot"></span>
+        SECURE FACULTY ACCESS
+      </div>
+
+
+      <h1>
+        Welcome
+        <span>back.</span>
+      </h1>
+
+
+      <p>
+        Sign in to manage your faculty profile,
+        availability, academic schedule and current
+        location through PUA UniTrack.
+      </p>
+
+
+      <div class="intro-features">
+
+        <div class="intro-feature">
+
+          <div class="feature-icon">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Doctor Dashboard
+            </strong>
+
+            <small>
+              Manage your academic information
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="intro-feature">
+
+          <div class="feature-icon">
+            ⌖
+          </div>
+
+          <div>
+            <strong>
+              Live Location
+            </strong>
+
+            <small>
+              Update your current building and room
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="intro-feature">
+
+          <div class="feature-icon">
+            AI
+          </div>
+
+          <div>
+            <strong>
+              AI Assistant
+            </strong>
+
+            <small>
+              Help students find faculty information
+            </small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LOGIN CARD
+    ====================================================== -->
+
+    <section class="auth-card">
+
+
+      <div class="card-top">
+
+        <div>
+
+          <span class="card-label">
+            FACULTY PORTAL
+          </span>
+
+          <h2>
+            Sign in
+          </h2>
+
+          <p>
+            Doctor or administrator access
+          </p>
+
+        </div>
+
+        <div class="secure-icon">
+          🔐
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           LOGIN FORM
+      ==================================================== -->
+
+      <form id="loginForm">
+
+        <div class="form-group">
+
+          <label for="email">
+            University / work email
+          </label>
+
+          <div class="input-wrap">
+
+            <span class="input-icon">
+              @
+            </span>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="name@university.edu"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="input-wrap">
+
+            <span class="input-icon">
+              •
+            </span>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              id="togglePassword"
+              class="password-toggle"
+              aria-label="Show password"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="loginButton"
+          class="primary-button"
+          type="submit"
+        >
+
+          <span id="loginButtonText">
+            Login
+          </span>
+
+          <span class="button-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <div
+          id="loginMessage"
+          class="form-message"
+          hidden
+        ></div>
+
+      </form>
+
+
+      <!-- ===================================================
+           REGISTER
+      ==================================================== -->
+
+      <div class="register-box">
+
+        <div>
+
+          <strong>
+            New doctor?
+          </strong>
+
+          <p>
+            Create your faculty account.
+            An administrator must approve the account
+            before it becomes active.
+          </p>
+
+        </div>
+
+        <a
+          href="/register.html"
+          class="secondary-button"
+        >
+          Create account
+        </a>
+
+      </div>
+
+
+      <!-- ===================================================
+           FOOTER
+      ==================================================== -->
+
+      <div class="card-footer">
+
+        <span>
+          PUA UniTrack
+        </span>
+
+        <span>
+          Faculty of Computer Science & Artificial Intelligence
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       LOGIN JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    const loginForm = document.getElementById("loginForm");
+
+    const emailInput = document.getElementById("email");
+
+    const passwordInput = document.getElementById("password");
+
+    const togglePassword =
+      document.getElementById("togglePassword");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const loginButtonText =
+      document.getElementById("loginButtonText");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+
+    /* =======================================================
+       SHOW / HIDE PASSWORD
+    ======================================================== */
+
+    togglePassword.addEventListener("click", () => {
+
+      const isPassword =
+        passwordInput.type === "password";
+
+      passwordInput.type =
+        isPassword ? "text" : "password";
+
+      togglePassword.textContent =
+        isPassword ? "Hide" : "Show";
+
+      togglePassword.setAttribute(
+        "aria-label",
+        isPassword ? "Hide password" : "Show password"
+      );
+
+    });
+
+
+    /* =======================================================
+       MESSAGE
+    ======================================================== */
+
+    function showMessage(message, type = "error") {
+
+      loginMessage.hidden = false;
+
+      loginMessage.className =
+        "form-message " + type;
+
+      loginMessage.textContent = message;
+
+    }
+
+
+    function hideMessage() {
+
+      loginMessage.hidden = true;
+
+      loginMessage.textContent = "";
+
+      loginMessage.className =
+        "form-message";
+
+    }
+
+
+    /* =======================================================
+       LOGIN
+    ======================================================== */
+
+    loginForm.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      hideMessage();
+
+
+      const email =
+        emailInput.value.trim().toLowerCase();
+
+      const password =
+        passwordInput.value;
+
+
+      if (!email || !password) {
+
+        showMessage(
+          "Please enter your email and password."
+        );
+
+        return;
+      }
+
+
+      /* Loading */
+
+      loginButton.disabled = true;
+
+      loginButtonText.innerHTML =
+        '<span class="loading-spinner"></span>Signing in...';
+
+
+      try {
+
+        const response = await fetch("/api/auth/login", {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            email,
+            password
+          })
+
+        });
+
+
+        let data = {};
+
+        try {
+          data = await response.json();
+        } catch {
+          data = {};
+        }
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.message ||
+            "Login failed. Please check your credentials."
+          );
+
+        }
+
+
+        /*
+         * Save authentication data
+         */
+
+        localStorage.setItem(
+          "pua_token",
+          data.token
+        );
+
+        localStorage.setItem(
+          "pua_user",
+          JSON.stringify(data.user)
+        );
+
+
+        showMessage(
+          "Login successful. Redirecting...",
+          "success"
+        );
+
+
+        /*
+         * Redirect according to account role
+         */
+
+        setTimeout(() => {
+
+          if (data.user.role === "ADMIN") {
+
+            window.location.href =
+              "/admin.html";
+
+            return;
+          }
+
+
+          if (data.user.role === "DOCTOR") {
+
+            if (data.user.approval === "PENDING") {
+
+              showMessage(
+                "Your doctor account is waiting for administrator approval.",
+                "error"
+              );
+
+              loginButton.disabled = false;
+
+              loginButtonText.textContent =
+                "Login";
+
+              return;
+            }
+
+
+            if (data.user.approval === "REJECTED") {
+
+              showMessage(
+                "Your doctor account has been rejected by the administrator.",
+                "error"
+              );
+
+              loginButton.disabled = false;
+
+              loginButtonText.textContent =
+                "Login";
+
+              return;
+            }
+
+
+            window.location.href =
+              "/dashboard.html";
+
+            return;
+          }
+
+
+          window.location.href = "/";
+
+        }, 500);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          error.message ||
+          "Unable to connect to the server."
+        );
+
+
+        loginButton.disabled = false;
+
+        loginButtonText.textContent =
+          "Login";
+
+      }
+
+    });
+
+
+    /* =======================================================
+       IF ALREADY LOGGED IN
+    ======================================================== */
+
+    window.addEventListener("DOMContentLoaded", () => {
+
+      const token =
+        localStorage.getItem("pua_token");
+
+      const user =
+        localStorage.getItem("pua_user");
+
+
+      /*
+       * Don't automatically redirect here.
+       * This allows the user to reach the login page
+       * whenever needed.
+       */
+
+      if (token && user) {
+
+        try {
+
+          const parsedUser =
+            JSON.parse(user);
+
+          console.log(
+            "Existing PUA UniTrack session:",
+            parsedUser.email
+          );
+
+        } catch {
+
+          localStorage.removeItem("pua_user");
+
+        }
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

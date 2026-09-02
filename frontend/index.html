@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PUA UniTrack AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header class="nav">
+
+    <a class="brand" href="/">
+
+      <div class="brand-mark">
+        <span>PUA</span>
+      </div>
+
+      <div>
+        <b>UniTrack <em>AI</em></b>
+        <small>CS & AI • Pharos University</small>
+      </div>
+
+    </a>
+
+    <nav>
+
+      <a href="#doctors">
+        Faculty
+      </a>
+
+      <a href="#features">
+        Features
+      </a>
+
+      <a
+        href="/login.html"
+        class="nav-login"
+      >
+        Doctor / Admin Login
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          <i></i>
+          PUA • COMPUTER SCIENCE & ARTIFICIAL INTELLIGENCE
+        </div>
+
+        <h1>
+          Find your doctor.
+          <br>
+          <span>Know where they are.</span>
+        </h1>
+
+        <p>
+          Search the approved faculty directory,
+          check availability and locations,
+          view schedules, or ask UniTrack AI
+          about faculty information available on the platform.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-wrap">
+
+          <div class="search">
+
+            <span>⌕</span>
+
+            <input
+              id="search"
+              placeholder="Search doctor, subject, code or office..."
+              autocomplete="off"
+            >
+
+            <button id="searchBtn">
+              Search
+            </button>
+
+          </div>
+
+          <div id="searchDrop"></div>
+
+        </div>
+
+
+        <!-- AI -->
+
+        <button
+          class="ai-cta"
+          id="openAi"
+        >
+          ✦ Ask UniTrack AI
+
+          <span>
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           VISUAL / BRAND AREA
+           NO FAKE LOCATION
+           NO FAKE STATUS
+      ========================== -->
+
+      <div class="hero-art">
+
+        <div class="ring ring-a"></div>
+        <div class="ring ring-b"></div>
+        <div class="ring ring-c"></div>
+
+        <div class="core">
+
+          <strong>
+            PUA
+          </strong>
+
+          <small>
+            CS & AI
+          </small>
+
+          <div class="core-line"></div>
+
+          <span>
+            UNiTRACK
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         DIRECTORY
+    ========================== -->
+
+    <section
+      id="doctors"
+      class="section"
+    >
+
+      <div class="section-title">
+
+        <div>
+
+          <label>
+            FACULTY DIRECTORY
+          </label>
+
+          <h2>
+            Approved faculty
+          </h2>
+
+        </div>
+
+        <button id="clearSearch">
+          View all →
+        </button>
+
+      </div>
+
+
+      <div
+        id="doctorGrid"
+        class="doctor-grid"
+      >
+
+        <div class="loading">
+          Loading faculty...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section
+      id="features"
+      class="section features-section"
+    >
+
+      <div class="center section-title">
+
+        <label>
+          UNiTRACK
+        </label>
+
+        <h2>
+          Faculty information in one place.
+        </h2>
+
+        <p>
+          Search faculty information stored on the platform,
+          including approved profiles, locations,
+          availability and schedules.
+        </p>
+
+      </div>
+
+
+      <div class="features">
+
+        <article>
+
+          <span>✦</span>
+
+          <h3>
+            AI Assistant
+          </h3>
+
+          <p>
+            Ask questions in Arabic or English.
+            The assistant uses approved faculty
+            information available through the platform.
+          </p>
+
+        </article>
+
+
+        <article>
+
+          <span>⌖</span>
+
+          <h3>
+            Faculty Location
+          </h3>
+
+          <p>
+            Approved doctors can update their
+            current building, room and availability
+            from their dashboard.
+          </p>
+
+        </article>
+
+
+        <article>
+
+          <span>◷</span>
+
+          <h3>
+            Teaching Schedule
+          </h3>
+
+          <p>
+            Faculty members can add their weekly
+            teaching schedule for students to reference.
+          </p>
+
+        </article>
+
+
+        <article>
+
+          <span>✓</span>
+
+          <h3>
+            Admin Approval
+          </h3>
+
+          <p>
+            New doctor accounts remain outside the
+            student directory until an administrator
+            approves them.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       AI PANEL
+  ========================== -->
+
+  <div
+    id="aiBackdrop"
+    class="backdrop"
+  ></div>
+
+
+  <aside
+    id="aiPanel"
+    class="ai-panel"
+  >
+
+    <header>
+
+      <div>
+
+        <b>
+          ✦ UniTrack AI
+        </b>
+
+        <small>
+          Faculty assistant
+        </small>
+
+      </div>
+
+      <button id="closeAi">
+        ×
+      </button>
+
+    </header>
+
+
+    <div
+      id="aiMessages"
+      class="ai-messages"
+    >
+
+      <div class="msg bot">
+
+        أهلاً 👋
+
+        اسألني عن دكتور أو مادة أو مكان
+        موجود في بيانات UniTrack.
+
+      </div>
+
+    </div>
+
+
+    <div class="ai-input">
+
+      <input
+        id="aiInput"
+        placeholder="Ask in Arabic or English..."
+      >
+
+      <button id="sendAi">
+        ➤
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div>
+
+      <b>
+        PUA UniTrack AI
+      </b>
+
+      <span>
+        Faculty information and availability platform
+      </span>
+
+    </div>
+
+    <span>
+      Faculty of Computer Science & Artificial Intelligence
+    </span>
+
+  </footer>
+
+
+  <script src="/app.js"></script>
+
+</body>
+</html>

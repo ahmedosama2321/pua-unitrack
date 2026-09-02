@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doctor Dashboard • PUA UniTrack</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header class="nav"><a class="brand" href="/"><div class="brand-mark"><span>PUA</span></div><div><b>UniTrack <em>AI</em></b><small>Doctor Dashboard</small></div></a><button id="logout" class="nav-login">Logout</button></header>
+<main class="dashboard">
+  <div class="dash-head"><div><label>DOCTOR DASHBOARD</label><h1 id="welcome">Loading...</h1><p>Control what students see about your current availability.</p></div><div id="approvalBadge" class="pill">...</div></div>
+  <div class="dash-grid">
+    <section class="panel">
+      <div class="panel-title"><div><b>Live status</b><small>Students see this immediately</small></div><span class="live-dot"></span></div>
+      <div class="status-buttons">
+        <button data-status="AVAILABLE">🟢 Available</button>
+        <button data-status="IN_LECTURE">🎓 In lecture</button>
+        <button data-status="UNAVAILABLE">⚪ Unavailable</button>
+      </div>
+      <div class="two"><input id="building" placeholder="Building"><input id="room" placeholder="Room / office"></div>
+      <button id="updateLocation" class="primary">Update my location</button>
+      <div id="locationMsg" class="form-msg"></div>
+    </section>
+    <section class="panel">
+      <div class="panel-title"><div><b>Profile</b><small>Public faculty information</small></div></div>
+      <input id="title" placeholder="Academic title">
+      <input id="phone" placeholder="Phone">
+      <div class="two"><input id="pBuilding" placeholder="Building"><input id="office" placeholder="Office"></div>
+      <textarea id="subjects" placeholder="Subjects, one per line"></textarea>
+      <button id="saveProfile" class="secondary">Save profile</button>
+      <div id="profileMsg" class="form-msg"></div>
+    </section>
+  </div>
+  <section class="panel schedule-panel">
+    <div class="panel-title"><div><b>Weekly schedule</b><small>Add teaching slots</small></div><button id="addSlot" class="small-btn">+ Add slot</button></div>
+    <div id="scheduleRows"></div>
+    <button id="saveSchedule" class="primary">Save schedule</button>
+    <div id="scheduleMsg" class="form-msg"></div>
+  </section>
+</main>
+<script src="/dashboard.js"></script>
+</body></html>

@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  DOCTOR
+  ADMIN
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  IN_LECTURE
+  UNAVAILABLE
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  passwordHash  String
+  name          String
+  role          UserRole       @default(DOCTOR)
+  approval      ApprovalStatus @default(PENDING)
+  doctor        Doctor?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Doctor {
+  id            String             @id @default(cuid())
+  userId        String             @unique
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department    String             @default("Computer Science & Artificial Intelligence")
+  title         String?
+  phone         String?
+  office        String?
+  building      String?
+  status        AvailabilityStatus @default(UNAVAILABLE)
+  lastUpdated   DateTime           @default(now())
+  subjects      Subject[]
+  schedules     Schedule[]
+  locations     LocationUpdate[]
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  name      String
+  code      String?
+  level     String?
+  doctorId  String
+  doctor    Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Schedule {
+  id        String   @id @default(cuid())
+  doctorId  String
+  doctor    Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  dayOfWeek Int
+  startTime String
+  endTime   String
+  building  String?
+  room      String?
+  subject   String?
+  createdAt DateTime @default(now())
+}
+
+model LocationUpdate {
+  id        String             @id @default(cuid())
+  doctorId  String
+  doctor    Doctor             @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  building  String
+  room      String
+  status    AvailabilityStatus
+  createdAt DateTime           @default(now())
+
+  @@index([doctorId, createdAt])
+}
